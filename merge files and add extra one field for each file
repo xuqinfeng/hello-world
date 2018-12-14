@@ -1,0 +1,25 @@
+import csv
+import os
+
+#get the filename under the specified folder
+filedir=os.getcwd()+'\click'
+filenames=os.listdir(filedir)  #list
+
+#genarate
+for filename in filenames:
+    filepath = filedir + '\\' + filename
+    with open(filepath,'r') as csvinput:
+        with open('20181214_final.csv', 'a') as csvoutput:
+            writer = csv.writer(csvoutput, lineterminator='\n')
+            reader = csv.reader(csvinput)
+
+            all = []
+            row = next(reader)
+            row.append('filename')
+            all.append(row)
+
+            for row in reader:
+                row.append(filename)
+                all.append(row)
+
+            writer.writerows(all)
